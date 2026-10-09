@@ -23,9 +23,7 @@ uses: actions/checkout@v4
       java-version: '17'
 
   - name: Build debug APK
-    run: |
-      gradle --version
-      gradle assembleDebug
+    run: gradle assembleDebug
 
   - name: Upload APK
     if: success()
