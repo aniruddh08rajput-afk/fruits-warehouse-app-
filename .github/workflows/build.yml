@@ -1,19 +1,12 @@
 name: Build Fruits Warehouse APK
 
-on:
-push:
-branches:
-- main
-workflow_dispatch:
-
-permissions:
-contents: read
+on: [push, workflow_dispatch]
 
 jobs:
 build:
 runs-on: ubuntu-latest
 steps:
-- name: Checkout source
+- name: Checkout repository
 uses: actions/checkout@v4
 
   - name: Set up Java
@@ -22,11 +15,10 @@ uses: actions/checkout@v4
       distribution: temurin
       java-version: '17'
 
-  - name: Build debug APK
+  - name: Build APK
     run: gradle assembleDebug
 
   - name: Upload APK
-    if: success()
     uses: actions/upload-artifact@v4
     with:
       name: fruits-warehouse-apk
