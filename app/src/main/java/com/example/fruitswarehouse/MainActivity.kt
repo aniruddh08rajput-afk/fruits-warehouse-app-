@@ -77,9 +77,8 @@ fun FruitsWarehouseApp() {
             message = "CSV export तैयार है। Excel में खोल सकते हैं।"
         } catch (e: Exception) { message = "Export असफल: ${e.message}" }
     }
-    val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri != null) try {
-            val text = context.contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() } ?: ""
+    
+onImport = { importLauncher.launch(arrayOf("*/*")) } context.contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() } ?: ""
             val imported = parseCsv(text)
             if (imported.isEmpty()) message = "कोई वैध रिकॉर्ड नहीं मिला। CSV का header सही रखें।"
             else {
